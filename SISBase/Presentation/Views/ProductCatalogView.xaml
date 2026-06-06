@@ -8,7 +8,8 @@
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="900">
     <Border Style="{StaticResource AppCardStyle}" Padding="12">
-        <TabControl>
+        <TabControl materialDesign:ColorZoneAssist.Mode="PrimaryDark"
+                    materialDesign:RippleAssist.IsCentered="True">
             <TabItem Header="Marcas">
                 <views:BrandsView/>
             </TabItem>

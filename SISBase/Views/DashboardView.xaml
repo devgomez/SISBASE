@@ -17,8 +17,8 @@
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Height" Value="46"/>
             <Setter Property="Margin" Value="0,2,0,2"/>
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="Padding" Value="12,0,0,0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="Padding" Value="12,0,10,0"/>
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Cursor" Value="Hand"/>
@@ -35,7 +35,32 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#274C68"/>
+                    <Setter Property="BorderBrush" Value="#3C6A8B"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Background" Value="#345D7A"/>
+                </Trigger>
+            </Style.Triggers>
 
+        </Style>
+
+        <Style x:Key="SidebarLabelStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#E4EDF8"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="SidebarIconStyle" TargetType="materialDesign:PackIcon">
+            <Setter Property="Width" Value="20"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="Foreground" Value="#CFE2F6"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
         </Style>
 
         <Style x:Key="TopIconButtonStyle"
@@ -56,12 +81,14 @@
     <Grid>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition x:Name="SidebarColumn" Width="254"/>
+            <ColumnDefinition x:Name="SidebarColumn" Width="Auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <Border Grid.Column="0"
+        <Border x:Name="SidebarHost"
+                Grid.Column="0"
                 Margin="12"
+                Width="254"
                 CornerRadius="18"
                 Padding="10,12"
                 BorderThickness="1"
@@ -111,7 +138,8 @@
                                    FontSize="18"
                                    FontWeight="Bold"/>
 
-                        <TextBlock Text="Panel administrativo"
+                        <TextBlock x:Name="txtLogoSubtitle"
+                                   Text="Panel administrativo"
                                    Foreground="#AAC4DA"
                                    FontSize="12"/>
 
@@ -130,16 +158,15 @@
                                 Style="{StaticResource SidebarButtonStyle}"
                                 Click="Dashboard_Click">
 
-                            <StackPanel Orientation="Horizontal">
-
-                                <materialDesign:PackIcon Kind="ViewDashboardOutline" Width="20" Height="20"/>
-
-                                <TextBlock x:Name="txtDashboard"
-                                           Text="Dashboard"
-                                           Margin="10,0,0,0"
-                                           VerticalAlignment="Center"/>
-
-                            </StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="24"/>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <materialDesign:PackIcon Kind="ViewDashboardOutline" Style="{StaticResource SidebarIconStyle}"/>
+                                <TextBlock Grid.Column="2" x:Name="txtDashboard" Text="Dashboard" Style="{StaticResource SidebarLabelStyle}"/>
+                            </Grid>
 
                         </Button>
 
@@ -147,16 +174,15 @@
                                 Style="{StaticResource SidebarButtonStyle}"
                                 Click="Products_Click">
 
-                            <StackPanel Orientation="Horizontal">
-
-                                <materialDesign:PackIcon Kind="PackageVariantClosed" Width="20" Height="20"/>
-
-                                <TextBlock x:Name="txtProducts"
-                                           Text="Productos"
-                                           Margin="10,0,0,0"
-                                           VerticalAlignment="Center"/>
-
-                            </StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="24"/>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <materialDesign:PackIcon Kind="PackageVariantClosed" Style="{StaticResource SidebarIconStyle}"/>
+                                <TextBlock Grid.Column="2" x:Name="txtProducts" Text="Productos" Style="{StaticResource SidebarLabelStyle}"/>
+                            </Grid>
 
                         </Button>
 
@@ -164,16 +190,15 @@
                                 Style="{StaticResource SidebarButtonStyle}"
                                 Click="Customers_Click">
 
-                            <StackPanel Orientation="Horizontal">
-
-                                <materialDesign:PackIcon Kind="AccountGroupOutline" Width="20" Height="20"/>
-
-                                <TextBlock x:Name="txtCustomers"
-                                           Text="Clientes"
-                                           Margin="10,0,0,0"
-                                           VerticalAlignment="Center"/>
-
-                            </StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="24"/>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <materialDesign:PackIcon Kind="AccountGroupOutline" Style="{StaticResource SidebarIconStyle}"/>
+                                <TextBlock Grid.Column="2" x:Name="txtCustomers" Text="Clientes" Style="{StaticResource SidebarLabelStyle}"/>
+                            </Grid>
 
                         </Button>
 
@@ -181,16 +206,15 @@
                                 Style="{StaticResource SidebarButtonStyle}"
                                 Click="btnRoles_Click">
 
-                            <StackPanel Orientation="Horizontal">
-
-                                <materialDesign:PackIcon Kind="ShieldAccountOutline" Width="20" Height="20"/>
-
-                                <TextBlock x:Name="txtSales"
-                                           Text="Roles"
-                                           Margin="10,0,0,0"
-                                           VerticalAlignment="Center"/>
-
-                            </StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="24"/>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <materialDesign:PackIcon Kind="ShieldAccountOutline" Style="{StaticResource SidebarIconStyle}"/>
+                                <TextBlock Grid.Column="2" x:Name="txtSales" Text="Roles" Style="{StaticResource SidebarLabelStyle}"/>
+                            </Grid>
 
                         </Button>
 
@@ -198,16 +222,15 @@
                                 Style="{StaticResource SidebarButtonStyle}"
                                 Click="btnUsuarios_Click">
 
-                            <StackPanel Orientation="Horizontal">
-
-                                <materialDesign:PackIcon Kind="AccountSupervisorCircleOutline" Width="20" Height="20"/>
-
-                                <TextBlock x:Name="txtPurchases"
-                                           Text="Usuarios y Roles"
-                                           Margin="10,0,0,0"
-                                           VerticalAlignment="Center"/>
-
-                            </StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="24"/>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <materialDesign:PackIcon Kind="AccountSupervisorCircleOutline" Style="{StaticResource SidebarIconStyle}"/>
+                                <TextBlock Grid.Column="2" x:Name="txtPurchases" Text="Usuarios y Roles" Style="{StaticResource SidebarLabelStyle}"/>
+                            </Grid>
 
                         </Button>
 
@@ -215,16 +238,15 @@
                                 Style="{StaticResource SidebarButtonStyle}"
                                 Click="btnOptions_Click">
 
-                            <StackPanel Orientation="Horizontal">
-
-                                <materialDesign:PackIcon Kind="TuneVariant" Width="20" Height="20"/>
-
-                                <TextBlock x:Name="txtInvoices"
-                                           Text="Opciones"
-                                           Margin="10,0,0,0"
-                                           VerticalAlignment="Center"/>
-
-                            </StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="24"/>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <materialDesign:PackIcon Kind="TuneVariant" Style="{StaticResource SidebarIconStyle}"/>
+                                <TextBlock Grid.Column="2" x:Name="txtInvoices" Text="Opciones" Style="{StaticResource SidebarLabelStyle}"/>
+                            </Grid>
 
                         </Button>
 

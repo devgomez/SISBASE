@@ -14,6 +14,7 @@ using SISBase.Views.Pages;
 using System.Windows.Media;
 using System.Windows.Controls;
 using SISBase.Presentation.Views;
+using System.Windows.Media.Animation;
 
 namespace SISBase.Views
 {
@@ -22,6 +23,9 @@ namespace SISBase.Views
     /// </summary>
     public partial class DashboardView : Window
     {
+        private const double ExpandedSidebarWidth = 254;
+        private const double CollapsedSidebarWidth = 84;
+
         private bool _collapsed = false;
         private Button? _activeButton;
 
@@ -56,12 +60,19 @@ namespace SISBase.Views
         private void BtnMenu_Click(object sender, RoutedEventArgs e)
         {
             _collapsed = !_collapsed;
+            ApplySidebarState();
+        }
+
+        private void ApplySidebarState()
+        {
+            var menuButtons = new[] { btnDashboard, btnProducts, btnCustomers, btnRoles, btnUsuarios, btnOpciones };
 
             if (_collapsed)
             {
-                SidebarColumn.Width = new GridLength(70);
+                AnimateSidebarWidth(CollapsedSidebarWidth);
 
                 txtLogo.Visibility = Visibility.Collapsed;
+                txtLogoSubtitle.Visibility = Visibility.Collapsed;
 
                 txtDashboard.Visibility = Visibility.Collapsed;
                 txtProducts.Visibility = Visibility.Collapsed;
@@ -71,12 +82,19 @@ namespace SISBase.Views
                 txtInvoices.Visibility = Visibility.Collapsed;
 
                 txtVersion.Visibility = Visibility.Collapsed;
+
+                foreach (var button in menuButtons)
+                {
+                    button.Padding = new Thickness(0);
+                    button.HorizontalContentAlignment = HorizontalAlignment.Center;
+                }
             }
             else
             {
-                SidebarColumn.Width = new GridLength(250);
+                AnimateSidebarWidth(ExpandedSidebarWidth);
 
                 txtLogo.Visibility = Visibility.Visible;
+                txtLogoSubtitle.Visibility = Visibility.Visible;
 
                 txtDashboard.Visibility = Visibility.Visible;
                 txtProducts.Visibility = Visibility.Visible;
@@ -86,7 +104,25 @@ namespace SISBase.Views
                 txtInvoices.Visibility = Visibility.Visible;
 
                 txtVersion.Visibility = Visibility.Visible;
+
+                foreach (var button in menuButtons)
+                {
+                    button.Padding = new Thickness(12, 0, 10, 0);
+                    button.HorizontalContentAlignment = HorizontalAlignment.Stretch;
+                }
             }
+        }
+
+        private void AnimateSidebarWidth(double targetWidth)
+        {
+            var animation = new DoubleAnimation
+            {
+                To = targetWidth,
+                Duration = TimeSpan.FromMilliseconds(220),
+                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut }
+            };
+
+            SidebarHost.BeginAnimation(FrameworkElement.WidthProperty, animation);
         }
 
         private void Dashboard_Click(object sender, RoutedEventArgs e)

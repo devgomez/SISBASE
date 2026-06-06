@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using SISBase.Domain.Interfaces;
 using SISBase.Infrastructure.Persistence.Sqlite;
 using SISBase.Presentation.ViewModels;
@@ -17,10 +18,15 @@ namespace SISBase.Infrastructure.DependencyInjection
            this IServiceCollection services,
            IConfiguration configuration)
         {
+            var sqliteConnection = configuration.GetConnectionString("Sqlite");
+            DbDiagnostics.LogStartupInfo(sqliteConnection);
+
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseSqlite(
-                    configuration.GetConnectionString("Sqlite"));
+                options.UseSqlite(sqliteConnection);
+                options.EnableDetailedErrors();
+                options.EnableSensitiveDataLogging();
+                options.LogTo(DbDiagnostics.LogEf, LogLevel.Information);
             });
 
             services.AddScoped<IRoleRepository, RoleRepository>();

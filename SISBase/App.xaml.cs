@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
 using SISBase.Infrastructure.DependencyInjection;
 using SISBase.Infrastructure.Persistence.Sqlite;
 using System.Configuration;
@@ -30,7 +31,14 @@ namespace SISBase
             using (var scope = Services.CreateScope())
             {
                 var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-                dbContext.Database.EnsureCreated();
+                var effectiveConnection = dbContext.Database.GetConnectionString();
+                var resolvedDb = DbDiagnostics.ResolveDbPath(effectiveConnection);
+
+                DbDiagnostics.Log($"EF EffectiveConnectionString: {effectiveConnection}");
+                DbDiagnostics.Log($"EF ResolvedDatabasePath: {resolvedDb ?? "<null>"}");
+
+                var created = dbContext.Database.EnsureCreated();
+                DbDiagnostics.Log($"EnsureCreatedResult: {created}");
             }
 
             base.OnStartup(e);

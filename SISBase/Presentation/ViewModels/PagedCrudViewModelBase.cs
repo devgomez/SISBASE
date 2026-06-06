@@ -24,6 +24,7 @@ namespace SISBase.Presentation.ViewModels
             EditCommand = new RelayCommand(item => Edit(item as TEntity));
             DeleteRowCommand = new RelayCommand(async item => await DeleteAsync(item as TEntity));
             SearchCommand = new RelayCommand(_ => ApplyFilters());
+            CloseFormCommand = new RelayCommand(_ => IsFormOpen = false);
 
             FirstPageCommand = new RelayCommand(_ => GoToFirstPage());
             PreviousPageCommand = new RelayCommand(_ => GoToPreviousPage());
@@ -43,6 +44,7 @@ namespace SISBase.Presentation.ViewModels
             {
                 _selectedItem = value ?? new TEntity();
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(FormTitle));
             }
         }
 
@@ -107,10 +109,24 @@ namespace SISBase.Presentation.ViewModels
         public ICommand EditCommand { get; }
         public ICommand DeleteRowCommand { get; }
         public ICommand SearchCommand { get; }
+        public ICommand CloseFormCommand { get; }
         public ICommand FirstPageCommand { get; }
         public ICommand PreviousPageCommand { get; }
         public ICommand NextPageCommand { get; }
         public ICommand LastPageCommand { get; }
+
+        private bool _isFormOpen;
+        public bool IsFormOpen
+        {
+            get => _isFormOpen;
+            set
+            {
+                _isFormOpen = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string FormTitle => GetId(SelectedItem) == 0 ? "Nuevo registro" : "Editar registro";
 
         protected async Task LoadAsync()
         {
@@ -127,6 +143,8 @@ namespace SISBase.Presentation.ViewModels
         private void New()
         {
             SelectedItem = CreateNewEntity();
+            IsFormOpen = true;
+            OnPropertyChanged(nameof(FormTitle));
         }
 
         protected virtual TEntity CreateNewEntity()
@@ -161,6 +179,8 @@ namespace SISBase.Presentation.ViewModels
             }
 
             SelectedItem = item;
+            IsFormOpen = true;
+            OnPropertyChanged(nameof(FormTitle));
         }
 
         private async Task SaveAsync()
@@ -184,6 +204,8 @@ namespace SISBase.Presentation.ViewModels
                 }
 
                 SelectedItem = CreateNewEntity();
+                IsFormOpen = false;
+                OnPropertyChanged(nameof(FormTitle));
                 await LoadAsync();
             }
             catch (Exception ex)
@@ -215,6 +237,7 @@ namespace SISBase.Presentation.ViewModels
             if (ReferenceEquals(item, SelectedItem))
             {
                 SelectedItem = CreateNewEntity();
+                OnPropertyChanged(nameof(FormTitle));
             }
 
             await LoadAsync();
