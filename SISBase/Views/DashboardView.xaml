@@ -121,7 +121,7 @@
                                 <materialDesign:PackIcon Kind="PackageVariant"/>
 
                                 <TextBlock x:Name="txtProducts"
-                                           Text="Productos"
+                                           Text="Productossss"
                                            Margin="10,0,0,0"/>
 
                             </StackPanel>
