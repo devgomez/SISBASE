@@ -6,38 +6,28 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d">
 
-    <Grid Margin="20">
+    <Grid Margin="18">
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="320"/>
-            <ColumnDefinition Width="15"/>
+            <ColumnDefinition Width="340"/>
+            <ColumnDefinition Width="14"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- ========================================= -->
-        <!-- FORMULARIO -->
-        <!-- ========================================= -->
-
-        <materialDesign:Card Grid.Column="0"
-                             Padding="20">
+        <Border Grid.Column="0"
+                Style="{StaticResource AppCardStyle}"
+                Padding="20">
 
             <StackPanel>
 
-                <StackPanel Orientation="Horizontal"
-                            Margin="0,0,0,20">
+                <TextBlock Text="Gestión de Roles"
+                           FontSize="24"
+                           FontWeight="SemiBold"/>
 
-                    <materialDesign:PackIcon
-                        Kind="ShieldAccount"
-                        Width="28"
-                        Height="28"
-                        Foreground="#1976D2"/>
-
-                    <TextBlock Text="Gestión de Roles"
-                               FontSize="22"
-                               FontWeight="SemiBold"
-                               Margin="10,0,0,0"
-                               VerticalAlignment="Center"/>
-                </StackPanel>
+                <TextBlock Text="Crea, edita y organiza los perfiles de acceso del sistema."
+                           Foreground="{StaticResource TextSecondaryBrush}"
+                           Margin="0,4,0,20"
+                           TextWrapping="Wrap"/>
 
                 <TextBox
                     IsReadOnly="True"
@@ -50,22 +40,24 @@
                     materialDesign:HintAssist.Hint="Nombre del Rol"/>
 
                 <CheckBox Content="Activo"
-                          Margin="0,15,0,0"
+                          Margin="0,6,0,0"
                           IsChecked="True"/>
 
-                <Separator Margin="0,20"/>
+                <Separator Margin="0,18"/>
 
                 <Button Command="{Binding SaveCommand}"
-                        Height="45"
-                        Style="{StaticResource MaterialDesignRaisedButton}">
+                        Style="{StaticResource AppPrimaryButtonStyle}">
 
                     <StackPanel Orientation="Horizontal">
 
                         <materialDesign:PackIcon
-                            Kind="ContentSave"/>
+                            Kind="ContentSaveOutline"
+                            Width="18"
+                            Height="18"/>
 
                         <TextBlock Text="Guardar"
-                                   Margin="10,0,0,0"/>
+                                   Margin="8,0,0,0"
+                                   Foreground="White"/>
 
                     </StackPanel>
 
@@ -73,13 +65,14 @@
 
                 <Button Command="{Binding NewCommand}"
                         Margin="0,10,0,0"
-                        Height="45"
-                        Style="{StaticResource MaterialDesignOutlinedButton}">
+                        Style="{StaticResource AppOutlineButtonStyle}">
 
                     <StackPanel Orientation="Horizontal">
 
                         <materialDesign:PackIcon
-                            Kind="Plus"/>
+                            Kind="Plus"
+                            Width="18"
+                            Height="18"/>
 
                         <TextBlock Text="Nuevo"
                                    Margin="10,0,0,0"/>
@@ -90,14 +83,15 @@
 
                 <Button Command="{Binding DeleteCommand}"
                         Margin="0,10,0,0"
-                        Height="45"
-                        Foreground="Red"
-                        BorderBrush="Red">
+                        Height="44"
+                        Foreground="#B91C1C"
+                        BorderBrush="#F3B0B0"
+                        Background="#FFF7F7">
 
                     <StackPanel Orientation="Horizontal">
 
                         <materialDesign:PackIcon
-                            Kind="Delete"/>
+                            Kind="DeleteOutline"/>
 
                         <TextBlock Text="Eliminar"
                                    Margin="10,0,0,0"/>
@@ -108,35 +102,30 @@
 
             </StackPanel>
 
-        </materialDesign:Card>
-
-        <!-- ========================================= -->
-        <!-- DERECHA -->
-        <!-- ========================================= -->
+        </Border>
 
         <Grid Grid.Column="2">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="15"/>
+                <RowDefinition Height="12"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <!-- FILTROS -->
-
-            <materialDesign:Card Grid.Row="0"
-                                 Padding="20">
+            <Border Grid.Row="0"
+                    Style="{StaticResource AppCardStyle}"
+                    Padding="18,16">
 
                 <Grid>
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="15"/>
+                        <ColumnDefinition Width="2.1*"/>
+                        <ColumnDefinition Width="12"/>
                         <ColumnDefinition Width="180"/>
-                        <ColumnDefinition Width="15"/>
+                        <ColumnDefinition Width="12"/>
                         <ColumnDefinition Width="180"/>
-                        <ColumnDefinition Width="15"/>
-                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition Width="12"/>
+                        <ColumnDefinition Width="140"/>
                     </Grid.ColumnDefinitions>
 
                     <TextBox Grid.Column="0"
@@ -161,16 +150,19 @@
                     </ComboBox>
 
                     <Button Grid.Column="6"
-                            Style="{StaticResource MaterialDesignRaisedButton}"
+                            Style="{StaticResource AppPrimaryButtonStyle}"
                             Command="{Binding SearchCommand}">
 
                         <StackPanel Orientation="Horizontal">
 
                             <materialDesign:PackIcon
-                                Kind="Magnify"/>
+                                Kind="Magnify"
+                                Width="18"
+                                Height="18"/>
 
                             <TextBlock Text="Buscar"
-                                       Margin="5,0,0,0"/>
+                                       Margin="6,0,0,0"
+                                       Foreground="White"/>
 
                         </StackPanel>
 
@@ -178,12 +170,11 @@
 
                 </Grid>
 
-            </materialDesign:Card>
+            </Border>
 
-            <!-- GRID -->
-
-            <materialDesign:Card Grid.Row="2"
-                                 Padding="15">
+            <Border Grid.Row="2"
+                    Style="{StaticResource AppCardStyle}"
+                    Padding="16,14">
 
                 <Grid>
 
@@ -193,28 +184,28 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <!-- HEADER -->
-
                     <DockPanel Margin="0,0,0,15">
 
                         <TextBlock Text="Lista de Roles"
-                                   FontSize="18"
+                                   FontSize="20"
                                    FontWeight="SemiBold"
                                    DockPanel.Dock="Left"/>
 
                         <Button DockPanel.Dock="Right"
                                 Width="140"
-                                Height="40"
                                 Command="{Binding NewCommand}"
-                                Style="{StaticResource MaterialDesignRaisedButton}">
+                                Style="{StaticResource AppPrimaryButtonStyle}">
 
                             <StackPanel Orientation="Horizontal">
 
                                 <materialDesign:PackIcon
-                                    Kind="Plus"/>
+                                    Kind="Plus"
+                                    Width="18"
+                                    Height="18"/>
 
                                 <TextBlock Text="Nuevo Rol"
-                                           Margin="5,0,0,0"/>
+                                           Margin="6,0,0,0"
+                                           Foreground="White"/>
 
                             </StackPanel>
 
@@ -222,54 +213,55 @@
 
                     </DockPanel>
 
-                    <!-- DATAGRID -->
-
                     <DataGrid
-    ItemsSource="{Binding Roles}"
-    SelectedItem="{Binding SelectedRole}"
-    AutoGenerateColumns="False"
-    CanUserAddRows="False"
-    IsReadOnly="True"
-    RowHeight="42"
-    HeadersVisibility="Column">
+                        ItemsSource="{Binding Roles}"
+                        SelectedItem="{Binding SelectedRole}"
+                        AutoGenerateColumns="False"
+                        IsReadOnly="True"
+                        Margin="0,0,0,2">
 
                         <DataGrid.Columns>
 
                             <DataGridTextColumn
-            Header="ID"
-            Width="80"
-            Binding="{Binding Id}"/>
+                                Header="ID"
+                                Width="80"
+                                Binding="{Binding Id}"/>
 
                             <DataGridTextColumn
-            Header="Nombre"
-            Width="*"
-            Binding="{Binding Name}"/>
+                                Header="Nombre"
+                                Width="*"
+                                Binding="{Binding Name}"/>
 
                             <DataGridTemplateColumn
-            Header="Acciones"
-            Width="140">
+                                Header="Acciones"
+                                Width="160">
 
                                 <DataGridTemplateColumn.CellTemplate>
 
                                     <DataTemplate>
 
-                                        <StackPanel Orientation="Horizontal">
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 
                                             <Button
-                            Command="{Binding DataContext.EditCommand,
-                            RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                            CommandParameter="{Binding}">
+                                                Width="30"
+                                                Height="30"
+                                                Margin="0,0,6,0"
+                                                Command="{Binding DataContext.EditCommand,
+                                                RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                CommandParameter="{Binding}">
 
-                                                <materialDesign:PackIcon Kind="Pencil"/>
+                                                <materialDesign:PackIcon Kind="PencilOutline" Width="16" Height="16"/>
 
                                             </Button>
 
                                             <Button
-                            Command="{Binding DataContext.DeleteRowCommand,
-                            RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                            CommandParameter="{Binding}">
+                                                Width="30"
+                                                Height="30"
+                                                Command="{Binding DataContext.DeleteRowCommand,
+                                                RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                CommandParameter="{Binding}">
 
-                                                <materialDesign:PackIcon Kind="Delete"/>
+                                                <materialDesign:PackIcon Kind="DeleteOutline" Width="16" Height="16" Foreground="#B91C1C"/>
 
                                             </Button>
 
@@ -285,45 +277,58 @@
 
                     </DataGrid>
 
-                    <!-- PAGINACIÓN -->
-
                     <DockPanel Grid.Row="2"
                                Margin="0,15,0,0">
 
                         <TextBlock Text="Mostrando 1-10 de 150 registros"
+                   Foreground="{StaticResource TextSecondaryBrush}"
                                    VerticalAlignment="Center"/>
 
                         <StackPanel Orientation="Horizontal"
                                     HorizontalAlignment="Right"
                                     DockPanel.Dock="Right">
 
-                            <Button Content="First"
-                                    Width="40"
-                                    Margin="3"/>
+                <Button Content="Primera"
+                    Style="{StaticResource AppOutlineButtonStyle}"
+                    Width="78"
+                    Height="34"
+                    Margin="3,0"/>
 
-                            <Button Content="Prev"
-                                    Width="40"
-                                    Margin="3"/>
+                <Button Content="Anterior"
+                    Style="{StaticResource AppOutlineButtonStyle}"
+                    Width="84"
+                    Height="34"
+                    Margin="3,0"/>
 
                             <Button Content="1"
-                                    Width="40"
-                                    Margin="3"/>
+                    Style="{StaticResource AppPrimaryButtonStyle}"
+                    Width="40"
+                    Height="34"
+                    Margin="3,0"/>
 
                             <Button Content="2"
-                                    Width="40"
-                                    Margin="3"/>
+                    Style="{StaticResource AppOutlineButtonStyle}"
+                    Width="40"
+                    Height="34"
+                    Margin="3,0"/>
 
                             <Button Content="3"
-                                    Width="40"
-                                    Margin="3"/>
+                    Style="{StaticResource AppOutlineButtonStyle}"
+                    Width="40"
+                    Height="34"
+                    Margin="3,0"/>
 
-                            <Button Content=">"
-                                    Width="40"
-                                    Margin="3"/>
+                <Button Content="Siguiente"
+                    Style="{StaticResource AppOutlineButtonStyle}"
+                    Width="84"
+                    Height="34"
+                    Margin="3,0"/>
 
-                            <Button Content=">>"
-                                    Width="40"
-                                    Margin="3"/>
+                <Button Content="Última"
+                    Style="{StaticResource AppOutlineButtonStyle}"
+                    Width="72"
+                    Height="34"
+                    Margin="3,0"/>
 
                         </StackPanel>
 
@@ -331,7 +336,7 @@
 
                 </Grid>
 
-            </materialDesign:Card>
+        </Border>
 
         </Grid>
 

@@ -5,33 +5,49 @@
         Title="SIS ERP"
         WindowState="Maximized"
         WindowStartupLocation="CenterScreen"
-        Background="#F5F7FA">
+        Background="{StaticResource SurfaceBrush}">
 
     <Window.Resources>
 
-        <Style x:Key="SidebarButtonStyle"
-           TargetType="Button">
+        <Style x:Key="SidebarButtonStyle" TargetType="Button">
 
-            <Setter Property="Foreground"
-                Value="White"/>
+            <Setter Property="Foreground" Value="#E4EDF8"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Height" Value="46"/>
+            <Setter Property="Margin" Value="0,2,0,2"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Padding" Value="12,0,0,0"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="10"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
 
-            <Setter Property="Background"
-                Value="Transparent"/>
+        </Style>
 
-            <Setter Property="BorderBrush"
-                Value="Transparent"/>
+        <Style x:Key="TopIconButtonStyle"
+               TargetType="Button"
+               BasedOn="{StaticResource MaterialDesignToolButton}">
 
-            <Setter Property="BorderThickness"
-                Value="0"/>
-
-            <Setter Property="Height"
-                Value="50"/>
-
-            <Setter Property="HorizontalContentAlignment"
-                Value="Left"/>
-
-            <Setter Property="Padding"
-                Value="15,0,0,0"/>
+            <Setter Property="Width" Value="38"/>
+            <Setter Property="Height" Value="38"/>
+            <Setter Property="Margin" Value="0,0,6,0"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrushSoft}"/>
+            <Setter Property="BorderThickness" Value="1"/>
 
         </Style>
 
@@ -40,169 +56,173 @@
     <Grid>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition x:Name="SidebarColumn"
-                              Width="250"/>
+            <ColumnDefinition x:Name="SidebarColumn" Width="254"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- SIDEBAR -->
-
         <Border Grid.Column="0"
-                Background="#0F172A">
+                Margin="12"
+                CornerRadius="18"
+                Padding="10,12"
+                BorderThickness="1"
+                BorderBrush="#234560">
+
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#102F47" Offset="0"/>
+                    <GradientStop Color="#0B2538" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
 
             <Grid>
 
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="90"/>
+                    <RowDefinition Height="80"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
 
-                <!-- LOGO -->
-
                 <StackPanel Grid.Row="0"
-                            VerticalAlignment="Center">
+                            Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            Margin="8,0,0,0">
 
-                    <materialDesign:PackIcon
-                        Kind="Warehouse"
-                        Width="40"
-                        Height="40"
-                        Foreground="White"
-                        HorizontalAlignment="Center"/>
+                    <Border Width="42"
+                            Height="42"
+                            CornerRadius="12"
+                            Background="#214560">
 
-                    <TextBlock x:Name="txtLogo"
-                               Text="SIS ERP"
-                               Foreground="White"
-                               FontSize="22"
-                               FontWeight="Bold"
-                               HorizontalAlignment="Center"
-                               Margin="0,8,0,0"/>
+                        <materialDesign:PackIcon
+                            Kind="Warehouse"
+                            Width="24"
+                            Height="24"
+                            Foreground="White"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"/>
+
+                    </Border>
+
+                    <StackPanel Margin="12,0,0,0"
+                                VerticalAlignment="Center">
+
+                        <TextBlock x:Name="txtLogo"
+                                   Text="SIS ERP"
+                                   Foreground="White"
+                                   FontSize="18"
+                                   FontWeight="Bold"/>
+
+                        <TextBlock Text="Panel administrativo"
+                                   Foreground="#AAC4DA"
+                                   FontSize="12"/>
+
+                    </StackPanel>
 
                 </StackPanel>
 
-                <!-- MENU -->
-
                 <ScrollViewer Grid.Row="1"
-                              VerticalScrollBarVisibility="Auto">
+                              VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Disabled"
+                              Margin="4,8,4,0">
 
-                    <StackPanel x:Name="MenuContainer"
-                                Margin="10">
-
-                        <!-- Dashboard -->
+                    <StackPanel x:Name="MenuContainer" Margin="0,6,0,0">
 
                         <Button x:Name="btnDashboard"
-                            Height="50"
-                                Foreground="White"
                                 Style="{StaticResource SidebarButtonStyle}"
                                 Click="Dashboard_Click">
 
                             <StackPanel Orientation="Horizontal">
 
-                                <materialDesign:PackIcon Kind="ViewDashboard"/>
+                                <materialDesign:PackIcon Kind="ViewDashboardOutline" Width="20" Height="20"/>
 
                                 <TextBlock x:Name="txtDashboard"
                                            Text="Dashboard"
-                                           Margin="10,0,0,0"/>
+                                           Margin="10,0,0,0"
+                                           VerticalAlignment="Center"/>
 
                             </StackPanel>
 
                         </Button>
 
-                        <!-- Productos -->
-
                         <Button x:Name="btnProducts"
-                                Height="50"
-                                Foreground="White"
                                 Style="{StaticResource SidebarButtonStyle}"
                                 Click="Products_Click">
 
                             <StackPanel Orientation="Horizontal">
 
-                                <materialDesign:PackIcon Kind="PackageVariant"/>
+                                <materialDesign:PackIcon Kind="PackageVariantClosed" Width="20" Height="20"/>
 
                                 <TextBlock x:Name="txtProducts"
-                                           Text="Productossss"
-                                           Margin="10,0,0,0"/>
+                                           Text="Productos"
+                                           Margin="10,0,0,0"
+                                           VerticalAlignment="Center"/>
 
                             </StackPanel>
 
                         </Button>
 
-                        <!-- Clientes -->
-
                         <Button x:Name="btnCustomers"
-                                Height="50"
-                                Foreground="White"
                                 Style="{StaticResource SidebarButtonStyle}"
                                 Click="Customers_Click">
 
                             <StackPanel Orientation="Horizontal">
 
-                                <materialDesign:PackIcon Kind="AccountGroup"/>
+                                <materialDesign:PackIcon Kind="AccountGroupOutline" Width="20" Height="20"/>
 
                                 <TextBlock x:Name="txtCustomers"
                                            Text="Clientes"
-                                           Margin="10,0,0,0"/>
+                                           Margin="10,0,0,0"
+                                           VerticalAlignment="Center"/>
 
                             </StackPanel>
 
                         </Button>
 
-                        <!-- Roles -->
-
-                        <Button x:Name="btnRoles" Height="50"
-                                Foreground="White"
+                        <Button x:Name="btnRoles"
                                 Style="{StaticResource SidebarButtonStyle}"
                                 Click="btnRoles_Click">
 
                             <StackPanel Orientation="Horizontal">
 
-                                <materialDesign:PackIcon Kind="Cart"/>
+                                <materialDesign:PackIcon Kind="ShieldAccountOutline" Width="20" Height="20"/>
 
                                 <TextBlock x:Name="txtSales"
                                            Text="Roles"
-                                           Margin="10,0,0,0"/>
+                                           Margin="10,0,0,0"
+                                           VerticalAlignment="Center"/>
 
                             </StackPanel>
 
                         </Button>
 
-                        <!-- Compras -->
-
-                        <Button 
-                            x:Name="btnUsuarios"
-                            Height="50"
-                                Foreground="White"
+                        <Button x:Name="btnUsuarios"
                                 Style="{StaticResource SidebarButtonStyle}"
-                            Click="btnUsuarios_Click">
+                                Click="btnUsuarios_Click">
 
                             <StackPanel Orientation="Horizontal">
 
-                                <materialDesign:PackIcon Kind="TruckDelivery"/>
+                                <materialDesign:PackIcon Kind="AccountSupervisorCircleOutline" Width="20" Height="20"/>
 
                                 <TextBlock x:Name="txtPurchases"
                                            Text="Usuarios y Roles"
-                                           Margin="10,0,0,0"/>
+                                           Margin="10,0,0,0"
+                                           VerticalAlignment="Center"/>
 
                             </StackPanel>
 
                         </Button>
 
-                        <!-- Facturación -->
-
                         <Button x:Name="btnOpciones"
-                            Height="50"
-                                Foreground="White"
                                 Style="{StaticResource SidebarButtonStyle}"
                                 Click="btnOptions_Click">
 
                             <StackPanel Orientation="Horizontal">
 
-                                <materialDesign:PackIcon Kind="ReceiptText"/>
+                                <materialDesign:PackIcon Kind="TuneVariant" Width="20" Height="20"/>
 
                                 <TextBlock x:Name="txtInvoices"
                                            Text="Opciones"
-                                           Margin="10,0,0,0"/>
+                                           Margin="10,0,0,0"
+                                           VerticalAlignment="Center"/>
 
                             </StackPanel>
 
@@ -212,15 +232,13 @@
 
                 </ScrollViewer>
 
-                <!-- FOOTER -->
-
                 <Border Grid.Row="2"
-                        BorderBrush="#334155"
+                        BorderBrush="#29445A"
                         BorderThickness="0,1,0,0">
 
                     <TextBlock x:Name="txtVersion"
                                Text="ERP v1.0"
-                               Foreground="#94A3B8"
+                               Foreground="#98B1C6"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"/>
 
@@ -230,20 +248,16 @@
 
         </Border>
 
-        <!-- CONTENIDO -->
-
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="1" Margin="0,12,12,12">
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="70"/>
+                <RowDefinition Height="88"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <!-- TOP BAR -->
-
-            <materialDesign:Card Grid.Row="0"
-                                 Margin="10,10,10,0"
-                                 Padding="10">
+            <Border Grid.Row="0"
+                    Style="{StaticResource AppCardStyle}"
+                    Padding="18,12">
 
                 <Grid>
 
@@ -252,8 +266,6 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-
-                    <!-- HAMBURGUESA -->
 
                     <Button x:Name="BtnMenu"
                             Grid.Column="0"
@@ -266,58 +278,64 @@
 
                     </Button>
 
-                    <!-- TITULO -->
-
-                    <TextBlock x:Name="txtPageTitle"
-                               Grid.Column="1"
-                               Text="Dashboard"
-                               FontSize="24"
-                               FontWeight="SemiBold"
-                               VerticalAlignment="Center"
-                               Margin="15,0,0,0"/>
-
-                    <!-- USUARIO -->
+                    <StackPanel Grid.Column="1" Margin="14,0,0,0" VerticalAlignment="Center">
+                        <TextBlock x:Name="txtPageTitle"
+                                   Text="Dashboard"
+                                   FontSize="24"
+                                   FontWeight="SemiBold"/>
+                        <TextBlock Text="Gestiona tu operación diaria desde un solo lugar"
+                                   Foreground="{StaticResource TextSecondaryBrush}"/>
+                    </StackPanel>
 
                     <StackPanel Grid.Column="2"
-                                Orientation="Horizontal">
+                                Orientation="Horizontal"
+                                VerticalAlignment="Center">
 
-                        <Button Style="{StaticResource MaterialDesignToolButton}">
+                        <Button Style="{StaticResource TopIconButtonStyle}">
                             <materialDesign:PackIcon x:Name="btnAlert" Kind="BellOutline"/>
                         </Button>
 
-                        <Button Style="{StaticResource MaterialDesignToolButton}">
-                            <materialDesign:PackIcon x:Name="btnSettings" Kind="Cog"/>
+                        <Button Style="{StaticResource TopIconButtonStyle}">
+                            <materialDesign:PackIcon x:Name="btnSettings" Kind="CogOutline"/>
                         </Button>
 
-                        <materialDesign:PackIcon
-                            Kind="AccountCircle"
-                            Width="36"
-                            Height="36"
-                            Margin="15,0,0,0"/>
+                        <Border Width="38"
+                                Height="38"
+                                CornerRadius="19"
+                                Background="#EAF1F8"
+                                Margin="4,0,0,0">
 
-                        <StackPanel Margin="10,0,0,0">
+                            <materialDesign:PackIcon
+                                Kind="Account"
+                                Width="22"
+                                Height="22"
+                                Foreground="{StaticResource PrimaryBrush}"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"/>
 
-                            <TextBlock Text="Administrador"/>
+                        </Border>
 
+                        <StackPanel Margin="10,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="Administrador" FontWeight="SemiBold"/>
                             <TextBlock Text="admin@siserp.com"
-                                       FontSize="11"/>
-
+                                       FontSize="11"
+                                       Foreground="{StaticResource TextSecondaryBrush}"/>
                         </StackPanel>
 
                     </StackPanel>
 
                 </Grid>
 
-            </materialDesign:Card>
+            </Border>
 
-            <!-- WORKSPACE -->
-
-            <materialDesign:Card Grid.Row="1"
-                                 Margin="10">
+            <Border Grid.Row="1"
+                    Style="{StaticResource AppCardStyle}"
+                    Margin="0,12,0,0"
+                    Padding="12">
 
                 <ContentControl x:Name="MainContent"/>
 
-            </materialDesign:Card>
+            </Border>
 
         </Grid>
 
