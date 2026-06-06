@@ -133,6 +133,7 @@
                              Text="{Binding SearchText}"/>
 
                     <ComboBox Grid.Column="2"
+                              SelectedValue="{Binding StatusFilter, UpdateSourceTrigger=PropertyChanged}"
                               materialDesign:HintAssist.Hint="Estado">
 
                         <ComboBoxItem Content="Todos"/>
@@ -280,7 +281,7 @@
                     <DockPanel Grid.Row="2"
                                Margin="0,15,0,0">
 
-                        <TextBlock Text="Mostrando 1-10 de 150 registros"
+                        <TextBlock Text="{Binding PaginationSummary}"
                    Foreground="{StaticResource TextSecondaryBrush}"
                                    VerticalAlignment="Center"/>
 
@@ -292,43 +293,50 @@
                     Style="{StaticResource AppOutlineButtonStyle}"
                     Width="78"
                     Height="34"
-                    Margin="3,0"/>
+                        Margin="3,0"
+                        Command="{Binding FirstPageCommand}"/>
 
                 <Button Content="Anterior"
                     Style="{StaticResource AppOutlineButtonStyle}"
                     Width="84"
                     Height="34"
-                    Margin="3,0"/>
+                        Margin="3,0"
+                        Command="{Binding PreviousPageCommand}"/>
 
                             <Button Content="1"
                     Style="{StaticResource AppPrimaryButtonStyle}"
                     Width="40"
                     Height="34"
-                    Margin="3,0"/>
+                                    Margin="3,0"
+                                    IsEnabled="False"/>
 
                             <Button Content="2"
                     Style="{StaticResource AppOutlineButtonStyle}"
                     Width="40"
                     Height="34"
-                    Margin="3,0"/>
+                                    Margin="3,0"
+                                    IsEnabled="False"/>
 
                             <Button Content="3"
                     Style="{StaticResource AppOutlineButtonStyle}"
                     Width="40"
                     Height="34"
-                    Margin="3,0"/>
+                                    Margin="3,0"
+                                    IsEnabled="False"/>
 
                 <Button Content="Siguiente"
                     Style="{StaticResource AppOutlineButtonStyle}"
                     Width="84"
                     Height="34"
-                    Margin="3,0"/>
+                        Margin="3,0"
+                        Command="{Binding NextPageCommand}"/>
 
                 <Button Content="Última"
                     Style="{StaticResource AppOutlineButtonStyle}"
                     Width="72"
                     Height="34"
-                    Margin="3,0"/>
+                        Margin="3,0"
+                        Command="{Binding LastPageCommand}"/>
 
                         </StackPanel>
 

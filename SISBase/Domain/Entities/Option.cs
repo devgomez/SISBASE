@@ -9,7 +9,7 @@ namespace SISBase.Domain.Entities
         public int Id { get; set; }
 
         public string Name { get; set; } = string.Empty;
-        public required string FormName { get; set; }
+        public string FormName { get; set; } = string.Empty;
         public string? Group { get; set; }
         public string? ShortName { get; set; }
         public string? Icon { get; set; }

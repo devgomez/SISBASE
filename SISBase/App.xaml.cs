@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SISBase.Infrastructure.DependencyInjection;
+using SISBase.Infrastructure.Persistence.Sqlite;
 using System.Configuration;
 using System.Data;
 using System.Windows;
@@ -25,6 +26,12 @@ namespace SISBase
             services.AddInfrastructure(configuration);
 
             Services = services.BuildServiceProvider();
+
+            using (var scope = Services.CreateScope())
+            {
+                var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+                dbContext.Database.EnsureCreated();
+            }
 
             base.OnStartup(e);
         }

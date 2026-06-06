@@ -4,128 +4,44 @@ using SISBase.Presentation.Commands;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
-using System.Windows;
-using System.Windows.Input;
 
-namespace SISBase.Presentation.ViewModels
-{
-    public class RoleViewModel : BaseViewModel
     {
         private readonly IRoleRepository _repository;
 
-        public ObservableCollection<Role> Roles
+    public class RoleViewModel : PagedCrudViewModelBase<Role>
         {
-            get;
-        } = new();
-
-        private Role _selectedRole = new();
-
-        public Role SelectedRole
-        {
-            get => _selectedRole;
-            set
-            {
-                _selectedRole = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public ICommand NewCommand { get; }
-
-        public ICommand SaveCommand { get; }
-
-        public ICommand DeleteCommand { get; }
-
-        public RoleViewModel(
-            IRoleRepository repository)
-        {
-            _repository = repository;
-
+        public RoleViewModel(IRoleRepository repository)
+            : base(repository)
             NewCommand =
-                new RelayCommand(_ => New());
-
-            SaveCommand =
-                new RelayCommand(async _ => await SaveAsync());
-
-            DeleteCommand =
-                new RelayCommand(async _ => await DeleteAsync());
-
-            _ = LoadAsync();
-        }
-
-        private async Task LoadAsync()
         {
             Roles.Clear();
+        public ObservableCollection<Role> Roles => Items;
 
-            var roles =
-                await _repository.GetAllAsync();
+        public Role SelectedRole
 
-            foreach (var role in roles)
-            {
-                Roles.Add(role);
-            }
+            get => SelectedItem;
+            set => SelectedItem = value;
         }
 
-        private void New()
+        protected override string DisplayName => "el rol";
+
+        protected override bool MatchesSearch(Role item, string search)
         {
-            SelectedRole = new Role();
+            return item.Name.Contains(search, StringComparison.OrdinalIgnoreCase);
         }
 
-        private async Task SaveAsync()
+        protected override string? Validate(Role item)
         {
-            try
-            {
-                if (string.IsNullOrWhiteSpace(
-                    SelectedRole.Name))
-                {
-                    MessageBox.Show(
-                        "Ingrese el nombre del rol.");
+            if (string.IsNullOrWhiteSpace(item.Name))
 
-                    return;
-                }
-
-                if (SelectedRole.Id == 0)
-                {
-                    await _repository.AddAsync(
-                        SelectedRole);
-                }
-                else
-                {
-                    await _repository.UpdateAsync(
-                        SelectedRole);
-                }
-
-                SelectedRole = new Role();
-
-                await LoadAsync();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private async Task DeleteAsync()
-        {
-            if (SelectedRole.Id == 0)
-                return;
-
-            if (MessageBox.Show(
-                "¿Eliminar registro?",
-                "Confirmar",
-                MessageBoxButton.YesNo)
-                != MessageBoxResult.Yes)
-            {
-                return;
-            }
-
-            await _repository.DeleteAsync(
+                return "Ingrese el nombre del rol.";
                 SelectedRole.Id);
 
-            SelectedRole = new Role();
+            return null;
 
-            await LoadAsync();
+
+        protected override IEnumerable<Role> SortItems(IEnumerable<Role> items)
+        {
+            return items.OrderBy(r => r.Name);
         }
-    }
-}
+

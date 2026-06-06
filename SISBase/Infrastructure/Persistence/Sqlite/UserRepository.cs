@@ -1,10 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using SISBase.Domain.Entities;
+using SISBase.Domain.Interfaces;
 
 namespace SISBase.Infrastructure.Persistence.Sqlite
 {
-    internal class UserRepository
+    public class UserRepository : GenericRepository<User>, IUserRepository
     {
+        public UserRepository(AppDbContext dbContext)
+            : base(dbContext)
+        {
+        }
     }
 }

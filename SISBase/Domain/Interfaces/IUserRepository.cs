@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using SISBase.Domain.Entities;
 
 namespace SISBase.Domain.Interfaces
 {
-    internal class IUserRepository
+    public interface IUserRepository : ICrudRepository<User>
     {
     }
 }

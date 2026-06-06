@@ -106,8 +106,8 @@ namespace SISBase.Views
         private void Products_Click(object sender, RoutedEventArgs e)
         {
             SetActiveMenu(btnProducts);
-            txtPageTitle.Text = "Productos";
-           // MainContent.Content = new ProductView();
+            txtPageTitle.Text = "Catalogo de Productos";
+            MainContent.Content = new ProductCatalogView();
         }
 
         private void btnRoles_Click(object sender, RoutedEventArgs e)
@@ -118,14 +118,14 @@ namespace SISBase.Views
         }
         private void btnUsuarios_Click(object sender, RoutedEventArgs e)
         {
-            SetActiveMenu(btnRoles);
+            SetActiveMenu(btnUsuarios);
             txtPageTitle.Text = "Gestión de Usuarios y Roles";
             MainContent.Content = new UsersView();
         }
 
         private void btnOptions_Click(object sender, RoutedEventArgs e)
         {
-            SetActiveMenu(btnRoles);
+            SetActiveMenu(btnOpciones);
             txtPageTitle.Text = "Opciones";
             MainContent.Content = new OptionsView();
         }

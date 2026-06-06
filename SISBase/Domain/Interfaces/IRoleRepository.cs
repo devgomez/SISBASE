@@ -5,16 +5,7 @@ using System.Text;
 
 namespace SISBase.Domain.Interfaces
 {
-    public interface IRoleRepository
+    public interface IRoleRepository : ICrudRepository<Role>
     {
-        Task<List<Role>> GetAllAsync();
-
-        Task<Role?> GetByIdAsync(int id);
-
-        Task AddAsync(Role role);
-
-        Task UpdateAsync(Role role);
-
-        Task DeleteAsync(int id);
     }
 }

@@ -16,6 +16,16 @@ namespace SISBase.Infrastructure.Persistence.Sqlite
 
         public DbSet<Role> Roles => Set<Role>();
 
+        public DbSet<Brand> Brands => Set<Brand>();
+
+        public DbSet<Category> Categories => Set<Category>();
+
+        public DbSet<Unit> Units => Set<Unit>();
+
+        public DbSet<Option> Options => Set<Option>();
+
+        public DbSet<Rol_Options> RoleOptions => Set<Rol_Options>();
+
 
     }
 

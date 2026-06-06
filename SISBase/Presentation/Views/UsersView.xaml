@@ -1,12 +1,133 @@
 ﻿<UserControl x:Class="SISBase.Presentation.Views.UsersView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SISBase.Presentation.Views"
-             mc:Ignorable="d" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+    <Grid Margin="18">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="360"/>
+            <ColumnDefinition Width="14"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" Style="{StaticResource AppCardStyle}" Padding="20">
+            <StackPanel>
+                <TextBlock Text="Usuarios" FontSize="24" FontWeight="SemiBold"/>
+                <TextBlock Text="Administra accesos, roles y estado del personal." Foreground="{StaticResource TextSecondaryBrush}" Margin="0,4,0,20"/>
+
+                <TextBox IsReadOnly="True" Text="{Binding SelectedUser.Id}" materialDesign:HintAssist.Hint="ID"/>
+                <TextBox Text="{Binding SelectedUser.Username, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Usuario"/>
+                <TextBox Text="{Binding SelectedUser.PasswordHash, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Contrasena"/>
+                <TextBox Text="{Binding SelectedUser.Name, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Nombre"/>
+                <TextBox Text="{Binding SelectedUser.Lastname, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Apellido"/>
+                <TextBox Text="{Binding SelectedUser.Email, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Correo"/>
+
+                <ComboBox ItemsSource="{Binding Roles}" SelectedValuePath="Id" DisplayMemberPath="Name" SelectedValue="{Binding SelectedUser.RoleId, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Rol"/>
+                <CheckBox Content="Activo" IsChecked="{Binding SelectedUser.Status}" Margin="0,6,0,0"/>
+
+                <Separator Margin="0,12"/>
+
+                <Button Command="{Binding SaveCommand}" Style="{StaticResource AppPrimaryButtonStyle}">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="ContentSaveOutline" Width="18" Height="18"/>
+                        <TextBlock Text="Guardar" Margin="8,0,0,0" Foreground="White"/>
+                    </StackPanel>
+                </Button>
+                <Button Command="{Binding NewCommand}" Margin="0,10,0,0" Style="{StaticResource AppOutlineButtonStyle}">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Plus" Width="18" Height="18"/>
+                        <TextBlock Text="Nuevo" Margin="8,0,0,0"/>
+                    </StackPanel>
+                </Button>
+                <Button Command="{Binding DeleteCommand}" Margin="0,10,0,0" Height="44" BorderBrush="#F3B0B0" Foreground="#B91C1C" Background="#FFF7F7">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="DeleteOutline" Width="18" Height="18"/>
+                        <TextBlock Text="Eliminar" Margin="8,0,0,0"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Border>
+
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="12"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.Row="0" Style="{StaticResource AppCardStyle}" Padding="16">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="12"/>
+                        <ColumnDefinition Width="180"/>
+                        <ColumnDefinition Width="12"/>
+                        <ColumnDefinition Width="140"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox Grid.Column="0" materialDesign:HintAssist.Hint="Buscar por usuario, nombre o correo" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
+                    <ComboBox Grid.Column="2" SelectedValue="{Binding StatusFilter, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Estado">
+                        <ComboBoxItem Content="Todos" IsSelected="True"/>
+                        <ComboBoxItem Content="Activos"/>
+                        <ComboBoxItem Content="Inactivos"/>
+                    </ComboBox>
+                    <Button Grid.Column="4" Command="{Binding SearchCommand}" Style="{StaticResource AppPrimaryButtonStyle}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Magnify" Width="18" Height="18"/>
+                            <TextBlock Text="Buscar" Margin="8,0,0,0" Foreground="White"/>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+            </Border>
+
+            <Border Grid.Row="2" Style="{StaticResource AppCardStyle}" Padding="16,12">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Lista de Usuarios" FontSize="20" FontWeight="SemiBold" Margin="0,0,0,14"/>
+
+                    <DataGrid Grid.Row="1" ItemsSource="{Binding Users}" SelectedItem="{Binding SelectedUser}" AutoGenerateColumns="False" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                            <DataGridTextColumn Header="Usuario" Binding="{Binding Username}" Width="110"/>
+                            <DataGridTextColumn Header="Nombre" Binding="{Binding Name}" Width="120"/>
+                            <DataGridTextColumn Header="Apellido" Binding="{Binding Lastname}" Width="120"/>
+                            <DataGridTextColumn Header="Correo" Binding="{Binding Email}" Width="180"/>
+                            <DataGridCheckBoxColumn Header="Activo" Binding="{Binding Status}" Width="80"/>
+                            <DataGridTemplateColumn Header="Acciones" Width="140">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <Button Width="30" Height="30" Margin="0,0,6,0" Command="{Binding DataContext.EditCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}">
+                                                <materialDesign:PackIcon Kind="PencilOutline" Width="16" Height="16"/>
+                                            </Button>
+                                            <Button Width="30" Height="30" Command="{Binding DataContext.DeleteRowCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" CommandParameter="{Binding}">
+                                                <materialDesign:PackIcon Kind="DeleteOutline" Width="16" Height="16" Foreground="#B91C1C"/>
+                                            </Button>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <DockPanel Grid.Row="2" Margin="0,12,0,0">
+                        <TextBlock Text="{Binding PaginationSummary}" VerticalAlignment="Center" Foreground="{StaticResource TextSecondaryBrush}"/>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" DockPanel.Dock="Right">
+                            <Button Content="Primera" Width="68" Height="34" Margin="3,0" Style="{StaticResource AppOutlineButtonStyle}" Command="{Binding FirstPageCommand}"/>
+                            <Button Content="Anterior" Width="76" Height="34" Margin="3,0" Style="{StaticResource AppOutlineButtonStyle}" Command="{Binding PreviousPageCommand}"/>
+                            <Button Content="Siguiente" Width="76" Height="34" Margin="3,0" Style="{StaticResource AppOutlineButtonStyle}" Command="{Binding NextPageCommand}"/>
+                            <Button Content="Ultima" Width="64" Height="34" Margin="3,0" Style="{StaticResource AppOutlineButtonStyle}" Command="{Binding LastPageCommand}"/>
+                        </StackPanel>
+                    </DockPanel>
+                </Grid>
+            </Border>
+        </Grid>
     </Grid>
 </UserControl>

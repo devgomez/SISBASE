@@ -24,7 +24,18 @@ namespace SISBase.Infrastructure.DependencyInjection
             });
 
             services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IBrandRepository, BrandRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IUnitRepository, UnitRepository>();
+            services.AddScoped<IOptionRepository, OptionRepository>();
+
             services.AddTransient<RoleViewModel>();
+            services.AddTransient<UserViewModel>();
+            services.AddTransient<BrandViewModel>();
+            services.AddTransient<CategoryViewModel>();
+            services.AddTransient<UnitViewModel>();
+            services.AddTransient<OptionViewModel>();
 
             return services;
         }
