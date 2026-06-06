@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="SISBase.Views.Controls.DashboardHomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
+
+    <Grid Margin="15">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="180"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <UniformGrid Rows="1"
+                     Columns="4">
+
+            <materialDesign:Card Margin="5">
+                <StackPanel Margin="20">
+                    <TextBlock Text="Ventas Hoy"/>
+                    <TextBlock Text="S/ 12,540"
+                               FontSize="28"
+                               FontWeight="Bold"/>
+                </StackPanel>
+            </materialDesign:Card>
+
+            <materialDesign:Card Margin="5">
+                <StackPanel Margin="20">
+                    <TextBlock Text="Clientes"/>
+                    <TextBlock Text="548"
+                               FontSize="28"
+                               FontWeight="Bold"/>
+                </StackPanel>
+            </materialDesign:Card>
+
+            <materialDesign:Card Margin="5">
+                <StackPanel Margin="20">
+                    <TextBlock Text="Productos"/>
+                    <TextBlock Text="1,256"
+                               FontSize="28"
+                               FontWeight="Bold"/>
+                </StackPanel>
+            </materialDesign:Card>
+
+            <materialDesign:Card Margin="5">
+                <StackPanel Margin="20">
+                    <TextBlock Text="Facturas"/>
+                    <TextBlock Text="87"
+                               FontSize="28"
+                               FontWeight="Bold"/>
+                </StackPanel>
+            </materialDesign:Card>
+
+        </UniformGrid>
+
+    </Grid>
+
+</UserControl>

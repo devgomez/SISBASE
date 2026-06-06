@@ -1,0 +1,198 @@
+﻿<Window x:Class="SISBase.Views.LoginView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title=""
+        Height="650"
+        Width="1200"
+        
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="White">
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5*" />
+            <ColumnDefinition Width="6*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- PANEL IZQUIERDO -->
+        <Border Grid.Column="0">
+
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#0D47A1" Offset="0"/>
+                    <GradientStop Color="#001B44" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+
+            <Grid>
+
+                <!-- Decoración -->
+                <Canvas>
+
+                    <Ellipse Width="400"
+                             Height="400"
+                             Fill="#10FFFFFF"
+                             Canvas.Left="-180"
+                             Canvas.Top="350"/>
+
+                    <Ellipse Width="250"
+                             Height="250"
+                             Fill="#08FFFFFF"
+                             Canvas.Left="450"
+                             Canvas.Top="-50"/>
+
+                </Canvas>
+
+                <StackPanel HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+
+                    <materialDesign:PackIcon
+                        Kind="Warehouse"
+                        Width="140"
+                        Height="140"
+                        Foreground="White"/>
+
+                    <TextBlock Text="SIS ERP"
+                               FontSize="42"
+                               FontWeight="Bold"
+                               Foreground="White"
+                               HorizontalAlignment="Center"
+                               Margin="0,20,0,10"/>
+
+                    <TextBlock Text="Sistema de Gestión Empresarial"
+                               FontSize="20"
+                               Foreground="White"
+                               Opacity="0.9"
+                               HorizontalAlignment="Center"/>
+
+                </StackPanel>
+
+            </Grid>
+
+        </Border>
+
+        <!-- PANEL DERECHO -->
+        <Grid Grid.Column="1"
+              Background="White">
+
+            <StackPanel Width="520"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center">
+
+                <!-- Título -->
+                <TextBlock Text="Iniciar Sesión"
+                           FontSize="48"
+                           FontWeight="SemiBold"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,50"/>
+
+                <!-- Usuario -->
+                <Border BorderBrush="#D0D0D0"
+                        BorderThickness="1"
+                        CornerRadius="8"
+                        Height="70"
+                        Margin="0,0,0,25">
+
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="70"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <materialDesign:PackIcon
+                            Grid.Column="0"
+                            Kind="Account"
+                            Width="30"
+                            Height="30"
+                            Foreground="#1976D2"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+
+                        <TextBox x:Name="txtUser"
+                                 Grid.Column="1"
+                                 BorderThickness="0"
+                                 FontSize="24"
+                                 VerticalContentAlignment="Center"
+                                 materialDesign:HintAssist.Hint="Usuario"/>
+
+                    </Grid>
+
+                </Border>
+
+                <!-- Password -->
+                <Border BorderBrush="#D0D0D0"
+                        BorderThickness="1"
+                        CornerRadius="8"
+                        Height="70"
+                        Margin="0,0,0,40">
+
+                    <Grid>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="70"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <materialDesign:PackIcon
+                            Grid.Column="0"
+                            Kind="Key"
+                            Width="30"
+                            Height="30"
+                            Foreground="#1976D2"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"/>
+
+                        <PasswordBox x:Name="txtPassword"
+                                     Grid.Column="1"
+                                     BorderThickness="0"
+                                     FontSize="24"
+                                     VerticalContentAlignment="Center"
+                                     materialDesign:HintAssist.Hint="Contraseña"/>
+
+                    </Grid>
+
+                </Border>
+
+                <!-- Botón -->
+                <Button Height="70"
+                        Name="btnLogIn"
+                        Style="{StaticResource MaterialDesignRaisedButton}"
+                        Click="btnLogIn_Click">
+
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center">
+
+                        <materialDesign:PackIcon
+                            Kind="Login"
+                            Width="32"
+                            Height="32"
+                            Margin="0,0,15,0"
+                            Foreground="White"/>
+
+                        <TextBlock Text="INGRESAR"
+                                   FontSize="24"
+                                   FontWeight="Bold"
+                                   VerticalAlignment="Center"/>
+
+                    </StackPanel>
+
+                </Button>
+
+                <!-- Versión -->
+                <TextBlock Text="Versión 1.0.0"
+                           FontSize="18"
+                           Margin="0,40,0,0"
+                           Foreground="#666"
+                           HorizontalAlignment="Center"/>
+
+            </StackPanel>
+
+        </Grid>
+
+    </Grid>
+
+</Window>

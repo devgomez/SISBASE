@@ -1,0 +1,326 @@
+﻿<Window x:Class="SISBase.Views.DashboardView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="SIS ERP"
+        WindowState="Maximized"
+        WindowStartupLocation="CenterScreen"
+        Background="#F5F7FA">
+
+    <Window.Resources>
+
+        <Style x:Key="SidebarButtonStyle"
+           TargetType="Button">
+
+            <Setter Property="Foreground"
+                Value="White"/>
+
+            <Setter Property="Background"
+                Value="Transparent"/>
+
+            <Setter Property="BorderBrush"
+                Value="Transparent"/>
+
+            <Setter Property="BorderThickness"
+                Value="0"/>
+
+            <Setter Property="Height"
+                Value="50"/>
+
+            <Setter Property="HorizontalContentAlignment"
+                Value="Left"/>
+
+            <Setter Property="Padding"
+                Value="15,0,0,0"/>
+
+        </Style>
+
+    </Window.Resources>
+
+    <Grid>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="SidebarColumn"
+                              Width="250"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- SIDEBAR -->
+
+        <Border Grid.Column="0"
+                Background="#0F172A">
+
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="90"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="60"/>
+                </Grid.RowDefinitions>
+
+                <!-- LOGO -->
+
+                <StackPanel Grid.Row="0"
+                            VerticalAlignment="Center">
+
+                    <materialDesign:PackIcon
+                        Kind="Warehouse"
+                        Width="40"
+                        Height="40"
+                        Foreground="White"
+                        HorizontalAlignment="Center"/>
+
+                    <TextBlock x:Name="txtLogo"
+                               Text="SIS ERP"
+                               Foreground="White"
+                               FontSize="22"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               Margin="0,8,0,0"/>
+
+                </StackPanel>
+
+                <!-- MENU -->
+
+                <ScrollViewer Grid.Row="1"
+                              VerticalScrollBarVisibility="Auto">
+
+                    <StackPanel x:Name="MenuContainer"
+                                Margin="10">
+
+                        <!-- Dashboard -->
+
+                        <Button x:Name="btnDashboard"
+                            Height="50"
+                                Foreground="White"
+                                Style="{StaticResource SidebarButtonStyle}"
+                                Click="Dashboard_Click">
+
+                            <StackPanel Orientation="Horizontal">
+
+                                <materialDesign:PackIcon Kind="ViewDashboard"/>
+
+                                <TextBlock x:Name="txtDashboard"
+                                           Text="Dashboard"
+                                           Margin="10,0,0,0"/>
+
+                            </StackPanel>
+
+                        </Button>
+
+                        <!-- Productos -->
+
+                        <Button x:Name="btnProducts"
+                                Height="50"
+                                Foreground="White"
+                                Style="{StaticResource SidebarButtonStyle}"
+                                Click="Products_Click">
+
+                            <StackPanel Orientation="Horizontal">
+
+                                <materialDesign:PackIcon Kind="PackageVariant"/>
+
+                                <TextBlock x:Name="txtProducts"
+                                           Text="Productos"
+                                           Margin="10,0,0,0"/>
+
+                            </StackPanel>
+
+                        </Button>
+
+                        <!-- Clientes -->
+
+                        <Button x:Name="btnCustomers"
+                                Height="50"
+                                Foreground="White"
+                                Style="{StaticResource SidebarButtonStyle}"
+                                Click="Customers_Click">
+
+                            <StackPanel Orientation="Horizontal">
+
+                                <materialDesign:PackIcon Kind="AccountGroup"/>
+
+                                <TextBlock x:Name="txtCustomers"
+                                           Text="Clientes"
+                                           Margin="10,0,0,0"/>
+
+                            </StackPanel>
+
+                        </Button>
+
+                        <!-- Roles -->
+
+                        <Button x:Name="btnRoles" Height="50"
+                                Foreground="White"
+                                Style="{StaticResource SidebarButtonStyle}"
+                                Click="btnRoles_Click">
+
+                            <StackPanel Orientation="Horizontal">
+
+                                <materialDesign:PackIcon Kind="Cart"/>
+
+                                <TextBlock x:Name="txtSales"
+                                           Text="Roles"
+                                           Margin="10,0,0,0"/>
+
+                            </StackPanel>
+
+                        </Button>
+
+                        <!-- Compras -->
+
+                        <Button 
+                            x:Name="btnUsuarios"
+                            Height="50"
+                                Foreground="White"
+                                Style="{StaticResource SidebarButtonStyle}"
+                            Click="btnUsuarios_Click">
+
+                            <StackPanel Orientation="Horizontal">
+
+                                <materialDesign:PackIcon Kind="TruckDelivery"/>
+
+                                <TextBlock x:Name="txtPurchases"
+                                           Text="Usuarios y Roles"
+                                           Margin="10,0,0,0"/>
+
+                            </StackPanel>
+
+                        </Button>
+
+                        <!-- Facturación -->
+
+                        <Button x:Name="btnOpciones"
+                            Height="50"
+                                Foreground="White"
+                                Style="{StaticResource SidebarButtonStyle}"
+                                Click="btnOptions_Click">
+
+                            <StackPanel Orientation="Horizontal">
+
+                                <materialDesign:PackIcon Kind="ReceiptText"/>
+
+                                <TextBlock x:Name="txtInvoices"
+                                           Text="Opciones"
+                                           Margin="10,0,0,0"/>
+
+                            </StackPanel>
+
+                        </Button>
+
+                    </StackPanel>
+
+                </ScrollViewer>
+
+                <!-- FOOTER -->
+
+                <Border Grid.Row="2"
+                        BorderBrush="#334155"
+                        BorderThickness="0,1,0,0">
+
+                    <TextBlock x:Name="txtVersion"
+                               Text="ERP v1.0"
+                               Foreground="#94A3B8"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+
+                </Border>
+
+            </Grid>
+
+        </Border>
+
+        <!-- CONTENIDO -->
+
+        <Grid Grid.Column="1">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!-- TOP BAR -->
+
+            <materialDesign:Card Grid.Row="0"
+                                 Margin="10,10,10,0"
+                                 Padding="10">
+
+                <Grid>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- HAMBURGUESA -->
+
+                    <Button x:Name="BtnMenu"
+                            Grid.Column="0"
+                            Width="40"
+                            Height="40"
+                            Click="BtnMenu_Click"
+                            Style="{StaticResource MaterialDesignToolButton}">
+
+                        <materialDesign:PackIcon Kind="Menu"/>
+
+                    </Button>
+
+                    <!-- TITULO -->
+
+                    <TextBlock x:Name="txtPageTitle"
+                               Grid.Column="1"
+                               Text="Dashboard"
+                               FontSize="24"
+                               FontWeight="SemiBold"
+                               VerticalAlignment="Center"
+                               Margin="15,0,0,0"/>
+
+                    <!-- USUARIO -->
+
+                    <StackPanel Grid.Column="2"
+                                Orientation="Horizontal">
+
+                        <Button Style="{StaticResource MaterialDesignToolButton}">
+                            <materialDesign:PackIcon x:Name="btnAlert" Kind="BellOutline"/>
+                        </Button>
+
+                        <Button Style="{StaticResource MaterialDesignToolButton}">
+                            <materialDesign:PackIcon x:Name="btnSettings" Kind="Cog"/>
+                        </Button>
+
+                        <materialDesign:PackIcon
+                            Kind="AccountCircle"
+                            Width="36"
+                            Height="36"
+                            Margin="15,0,0,0"/>
+
+                        <StackPanel Margin="10,0,0,0">
+
+                            <TextBlock Text="Administrador"/>
+
+                            <TextBlock Text="admin@siserp.com"
+                                       FontSize="11"/>
+
+                        </StackPanel>
+
+                    </StackPanel>
+
+                </Grid>
+
+            </materialDesign:Card>
+
+            <!-- WORKSPACE -->
+
+            <materialDesign:Card Grid.Row="1"
+                                 Margin="10">
+
+                <ContentControl x:Name="MainContent"/>
+
+            </materialDesign:Card>
+
+        </Grid>
+
+    </Grid>
+
+</Window>
